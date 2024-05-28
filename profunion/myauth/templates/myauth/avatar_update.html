@@ -1,0 +1,17 @@
+{% extends 'myauth/base.html' %}
+
+{% block title %}
+  Заменить аватарку пользователя
+{% endblock %}
+
+{% block body %}
+  <h3>Сменить (удалить) аватарку пользователя </b></h3><br>
+  <div>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Сохранить изменения</button>
+    </form>
+  </div>
+
+{% endblock %}

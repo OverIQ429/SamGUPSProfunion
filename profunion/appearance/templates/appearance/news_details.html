@@ -1,0 +1,15 @@
+{% extends 'appearance/base.html' %}
+{% block title %}
+    {{ new.name }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ new.name }}</h1>
+        <div>
+          <p>{{ new.article }}</p>
+          <p>{{ new.created_at }}</p>
+          <div>
+              <a href="{% url 'appearance:index' %}">Вернуться на главную страницу</a>
+          </div>
+        </div>
+{% endblock %}

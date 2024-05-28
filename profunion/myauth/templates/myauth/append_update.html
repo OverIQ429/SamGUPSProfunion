@@ -1,0 +1,16 @@
+{% extends 'myauth/base.html' %}
+
+{% block title %}
+  Рассмотрение заявки
+{% endblock %}
+
+{% block body %}
+  <h3>Заявка пользователя  </b></h3><br>
+  <div>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Сохранить изменения</button>
+    </form>
+  </div>
+{% endblock %}

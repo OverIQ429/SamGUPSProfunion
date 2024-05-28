@@ -1,0 +1,27 @@
+{% extends 'appearance/base.html' %}
+{% block title %}
+    Новости
+{% endblock %}
+
+{% block body %}
+    <h1>Новости провсоюза</h1>
+    {% if news %}
+        <div>
+            {% for new in news %}
+                <div>
+                    <h3>{{ new.name }}</h3>
+                    <p>{{ new.article|slice:":45" }}{% if new.article|length > 45 %}...{% endif %}</p>
+                    <p>{{ new.created_at }}</p>
+                    {% if new.photos %}
+                        <img src="{{ new.photos.url }}" alt="Фотография новости">
+                    {% endif %}
+                     <div>
+                         <a href="{% url 'appearance:new_details' pk=new.pk  %}">Читать статью</a>
+                     </div>
+                </div>
+            {% endfor %}
+        </div>
+      {% else %}
+        <h3>Никаких новостей нет</h3>
+      {% endif %}
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'myauth/base.html' %}
+
+{% block title %}
+  User List
+{% endblock %}
+
+{% block body %}
+  <h1>Список заявлений</h1>
+  <table>
+    <tr>
+      <th>Пользователь</th>
+      <th>Тип заявления</th>
+      <th>Дата подачи</th>
+      <th>Состояние</th>
+     </tr>
+    {% for append in appends %}
+        <tr>
+          <td>{{ append.user }}</td>
+          <td>{{ append.description.text }}</td>
+          <td>{{ append.created_at }}</td>
+          <td>{{ append.decision.text }}</td>
+          <td>
+            <a href="{% url 'myauth:check_appends' append.pk %}">Посмотреть заявление</a>
+          </td>
+        </tr>
+
+    {% empty %}
+      <tr>
+        <td colspan="7">Список пуст</td>
+      </tr>
+    {% endfor %}
+  </table>
+{% endblock %}

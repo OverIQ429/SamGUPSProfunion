@@ -1,0 +1,41 @@
+{% extends 'myauth/base.html' %}
+
+{% block title %}
+  Личный Кабинет
+{% endblock %}
+
+
+{% block body %}
+<section>
+  <h1>Личные данные</h1>
+  {% if user.is_authenticated %}
+  <div>
+    <p>Имя: {{ user.username }}</p>
+    <p>Фамилия: {{ user.first_name }}</p>
+    <p>Группа: {{ user.profile.group.groupname }}</p>
+    <p>Почта: {{ user.profile.email }}</p>
+    <p>Телефон: {{ user.profile.phone_number }}</p>
+    <p>Аватар: {{ user.profile.url  }}</p>
+    {% if user.profile.avatar %}
+      <img src="{{ user.profile.avatar.url }}" alt="{{ user.profile.avatar.name }}">
+    {% else %}
+        <div>Аватарка пока не загружена</div>
+    {% endif %}<br><br>
+  </div>
+  <div>
+    <h3>Заявления</h3>
+    {% if appends %}
+      <ul>
+        {% for append in appends %}
+          <li>{{ append.description }} {{ append.decision }}</li>
+        {% endfor %}
+      </ul>
+    {% else %}
+    <p>У вас нет активных заявок</p>
+    {% endif %}
+  </div>
+  {% else %}
+    <h2>Пользователь аноним</h2>
+  {% endif %}
+</section>
+{% endblock %}

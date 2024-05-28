@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>
+    {% block title %}
+      Base Title
+    {% endblock %}
+  </title>
+  <div>
+    <a href="{% url 'appearance:index' %}">Новости</a>
+    <a href="{% url 'appearance:about_us' %}">О нас</a>
+    <a href="{% url 'appearance:index' %}">Документы</a>
+    <a href="{% url 'appearance:contact' %}">Контакты</a>
+    <a href="{% url 'myauth:register' %}">Вступить в профсоюз</a>
+    <a href="{% url 'myauth:login' %}">Войти в личный кабинет</a>
+  </div>
+</head>
+<body>
+
+{% block body %}
+  Base body
+{% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+{% extends 'myauth/base.html' %}
+
+{% block title %}
+  User Info
+{% endblock %}
+
+{% block body %}
+
+    <h1>User <strong>{{ user.username }} info </strong></h1>
+      <h2>Detail</h2>
+      <div>
+      <p>Username: {{ user.username }}</p>
+      <p>First name: {{ user.first_name }}</p>
+      <p>Last name: {{ user.last_name }}</p>
+      <p>Email: {{ user.email }}</p>
+      <p>Вступил в профсоюз: {{ user.profile.is_union_member }}</p>
+      <p>Avatar: {{ user.profile.url }}</p>
+        </div>
+      {% if user.profile.avatar %}
+
+        <img src="{{ user.profile.avatar.url }}" alt="{{ user.profile.avatar.name }}">
+      {% else %}
+          <div>Avatar not upload yet</div>
+      {% endif %}
+      <div>
+      </div>
+      <div>
+        <h3>Заявления</h3>
+        {% if appends %}
+          <ul>
+            {% for append in appends %}
+              <li>{{ append.description }} {{ append.decision }} <a href="{% url 'myauth:check_appends' append.pk %}">Рассмотреть заявку</a></li>
+            {% endfor %}
+          </ul>
+        {% else %}
+        <p>У {{ user.username }} нет активных заявок</p>
+        {% endif %}
+      </div>
+      <div>
+          <a href="{% url 'myauth:users_list' %}">Back to list</a>
+      </div>
+{% endblock %}

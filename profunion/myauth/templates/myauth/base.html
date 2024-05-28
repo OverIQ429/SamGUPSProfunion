@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}
+
+    {% endblock %}</title>
+    <style>
+        *{
+            font-family: 'Roboto', sans-serif;
+        }
+    </style>
+    <div>
+    <a href="{% url 'myauth:logout' %}">Здравствуйте {{ user.username }}, выход</a>
+    </div>
+    {% if user.group != 'Not union group' %}
+    <div>
+        <a href="{% url 'myauth:about-me' %}">Личные данные</a>
+    </div>
+    {% endif %}
+
+    <div>
+        <a href="{% url 'myauth:all_appends'%}">Заявление</a>
+    </div>
+    {% if user.is_superuser %}
+        <div>
+          <a href="{% url 'myauth:users_list'%}">Список членов профсоюза</a>
+        </div>
+    {% endif %}
+    {% if user.is_superuser %}
+        <div>
+          <a href="{% url 'myauth:check_all_appends'%}">Заявления членов профсоюза</a>
+        </div>
+    {% endif %}
+    <div>
+      <a href="{% url 'myauth:create_append' pk=user.pk %}">Подать заявление</a>
+    </div>
+    <div>
+      <a href="{% url 'myauth:my_appends' %}">Мои заявления</a>
+    </div>
+    {% if user.is_superuser %}
+        <div>
+          <a href="{% url 'myauth:report_users'%}">Отчёт</a>
+        </div>
+    {% endif %}
+</head>
+<body>
+{% block body %}
+
+{% endblock %}
+</body>
+</html>

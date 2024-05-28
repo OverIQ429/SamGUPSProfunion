@@ -1,0 +1,19 @@
+{% extends 'myauth/base.html' %}
+
+{% block title %}
+  Примеры заявлений
+{% endblock %}
+
+
+{% block body %}
+    {% if user.groups.exists and user.groups.first.name == 'Not union group' %}
+        <div>
+            <a href="\uploads\appends_all\obrazec_zayavleniya_na_vstuplenie_v_profsouz.docx" download="Заявление на вступление в профсоюз">Заявление на вступление в профсоюз </a>
+        </div>
+    {% endif %}
+    {% if user.groups.exists and user.groups.first.name == 'Union Members' %}
+        <div>
+            <a href="\uploads\appends_all\Zayavlenie-na-vykhod-iz-profsoyuza (2).doc" download="Заявление на выход из профсоюза">Заявление на выход из профсоюза </a>
+        </div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'myauth/base.html' %}
+
+{% block title %}
+    Отчет
+{% endblock %}
+
+{% block body %}
+<p>Фильтры</p>
+<form method="get">
+    <label for="start_date">Начальная дата:</label>
+    <input type="date" id="start_date" name="start_date">
+
+    <label for="end_date">Конечная дата:</label>
+    <input type="date" id="end_date" name="end_date">
+
+    <label for="course">Курс:</label>
+    <input type="text" id="course" name="course" placeholder="Курс">
+
+    <label for="faculty">Факультет:</label>
+    <input type="text" id="faculty" name="faculty" placeholder="Факультет">
+
+    <label for="group">Группа:</label>
+    <select id="group" name="group">
+        <option value="">Выберите группу</option>
+        <option value="1">ИВТб-01</option>
+
+    <input type="text" name="name" placeholder="Поиск по имени">
+        <button type="submit">Поиск</button>
+    </select>
+
+    <button type="submit">Применить фильтры</button>
+    <a href="?">Сбросить фильтры</a>
+
+</form>
+    <table>
+    <tr>
+      <th>Имя</th>
+      <th>фамилия</th>
+      <th>Отчество</th>
+      <th>Почта</th>
+      <th>Группа</th>
+      <th>факультет</th>
+      <th>Курс</th>
+      <th>Дата регистрации</th>
+      <th>Член профсоюза</th>
+    </tr>
+    {% for user in profiles %}
+      <tr>
+        <td>{{ user.username }}</td>
+        <td>{{ user.first_name }}</td>
+        <td>{{ user.last_name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.profile.group }}</td>
+        <td>{{ user.profile.group.faculty }}</td>
+        <td>{{ user.profile.group.course }}</td>
+        <td>{{ user.profile.created_at }}</td>
+        <td>{{ user.profile.is_union_member }}</td>
+      </tr>
+    {% empty %}
+      <tr>
+        <td colspan="7">Лист пустой</td>
+      </tr>
+    {% endfor %}
+    <a href="{% url 'myauth:download_table' %}?{{ request.GET.urlencode }}">Скачать таблицу</a>
+  </table>
+{% endblock %}

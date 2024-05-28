@@ -1,0 +1,27 @@
+{% extends 'myauth/base.html' %}
+
+{% block title %}
+    Мои заявления
+{% endblock %}
+
+{% block body %}
+    <h1>Мои заявления</h1>
+    <ul>
+        {% for append in object_list %}
+        <li>
+            <h3>{{ append.description }}</h3>
+            {% if append.commentary %}
+                <p>{{ append.commentary }}</p>
+            {% endif %}
+            <p>{{ append.decision }}</p>
+            <p>{{ append.file }}</p>
+            <a href="{{ append.file.url }}" download>Скачать файл</a>
+            <form action="{% url 'myauth:delete_append' append.pk %}" method="post">
+                {% csrf_token %}
+                <button type="submit">Удалить заявление</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
