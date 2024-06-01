@@ -7,7 +7,31 @@
       Base Title
     {% endblock %}
   </title>
-  <div>
+  <style>
+    *{
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .label{
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            padding: 0 20%; /* Обязательное расстояние от краёв экрана */
+            background-color: darkblue; /* Тёмно-синий фон */
+            color: white; /* Белый текст */
+            text-decoration: none; /* Убрать нижние линии у ссылок */
+            max-width: 100%; /* Ширина меню */
+            height: 2vh; /* Высота меню, чтобы оно было квадратом */
+            margin: auto;
+        }
+
+        .label a {
+            color: white; /* Белый текст для ссылок */
+            text-decoration: none; /* Убрать нижние линии у ссылок */
+        }
+
+  </style>
+  <div class="label">
     <a href="{% url 'appearance:index' %}">Новости</a>
     <a href="{% url 'appearance:about_us' %}">О нас</a>
     <a href="{% url 'appearance:index' %}">Документы</a>

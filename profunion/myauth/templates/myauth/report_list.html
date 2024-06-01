@@ -3,7 +3,42 @@
 {% block title %}
     Отчет
 {% endblock %}
-
+{% block head %}
+<style>
+    .table {
+        width: 100%;
+        border: none;
+        margin-bottom: 20px;
+    }
+    .table thead th {
+        font-weight: bold;
+        text-align: left;
+        border: none;
+        padding: 10px 15px;
+        background: #d8d8d8;
+        font-size: 14px;
+        border-left: 1px solid #ddd;
+        border-right: 1px solid #ddd;
+    }
+    .table tbody td {
+        text-align: left;
+        border-left: 1px solid #ddd;
+        border-right: 1px solid #ddd;
+        padding: 10px 15px;
+        font-size: 14px;
+        vertical-align: top;
+    }
+    .table thead tr th:first-child, .table tbody tr td:first-child {
+        border-left: none;
+    }
+    .table thead tr th:last-child, .table tbody tr td:last-child {
+        border-right: none;
+    }
+    .table tbody tr:nth-child(even){
+        background: #f3f3f3;
+    }
+    </style>
+{% endblock %}
 {% block body %}
 <p>Фильтры</p>
 <form method="get">
@@ -32,30 +67,34 @@
     <a href="?">Сбросить фильтры</a>
 
 </form>
-    <table>
-    <tr>
-      <th>Имя</th>
-      <th>фамилия</th>
-      <th>Отчество</th>
-      <th>Почта</th>
-      <th>Группа</th>
-      <th>факультет</th>
-      <th>Курс</th>
-      <th>Дата регистрации</th>
-      <th>Член профсоюза</th>
-    </tr>
+    <table class="table">
+        <thead>
+            <tr>
+              <th>Имя</th>
+              <th>Фамилия</th>
+              <th>Отчество</th>
+              <th>Почта</th>
+              <th>Группа</th>
+              <th>Факультет</th>
+              <th>Курс</th>
+              <th>Дата регистрации</th>
+              <th>Член профсоюза</th>
+            </tr>
+        </thead>
     {% for user in profiles %}
-      <tr>
-        <td>{{ user.username }}</td>
-        <td>{{ user.first_name }}</td>
-        <td>{{ user.last_name }}</td>
-        <td>{{ user.email }}</td>
-        <td>{{ user.profile.group }}</td>
-        <td>{{ user.profile.group.faculty }}</td>
-        <td>{{ user.profile.group.course }}</td>
-        <td>{{ user.profile.created_at }}</td>
-        <td>{{ user.profile.is_union_member }}</td>
-      </tr>
+        <tbody>
+          <tr>
+            <td>{{ user.username }}</td>
+            <td>{{ user.first_name }}</td>
+            <td>{{ user.last_name }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.profile.group }}</td>
+            <td>{{ user.profile.group.faculty }}</td>
+            <td>{{ user.profile.group.course }}</td>
+            <td>{{ user.profile.created_at }}</td>
+            <td>{{ user.profile.is_union_member }}</td>
+          </tr>
+        </tbody>
     {% empty %}
       <tr>
         <td colspan="7">Лист пустой</td>
