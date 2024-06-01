@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.views import View
 from django.views.generic import ListView
 
-from .models import News
+from myauth.models import News
 
 class NewsView(ListView):
     template_name = 'appearance/news_list.html'

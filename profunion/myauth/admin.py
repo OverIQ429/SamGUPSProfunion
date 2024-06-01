@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Appends, Description, AllGroups, Decision, Profile
+from .models import Appends, Description, AllGroups, Decision, Profile, News_Type, News
 # Register your models here.
 
 @admin.register(Appends)
@@ -16,6 +16,10 @@ class AllGroupsAdmin(admin.ModelAdmin):
 
 @admin.register(Decision)
 class DecisionAdmin(admin.ModelAdmin):
+    list_display = ("text", )
+
+@admin.register(News_Type)
+class News_TypeAdmin(admin.ModelAdmin):
     list_display = ("text", )
 
 @admin.register(Profile)

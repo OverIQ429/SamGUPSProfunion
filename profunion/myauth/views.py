@@ -1,3 +1,4 @@
+from django.utils import timezone
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.views import LogoutView
@@ -8,9 +9,10 @@ from django.urls import reverse, reverse_lazy
 from django.views import View
 from django.views.generic import TemplateView, CreateView, UpdateView, ListView, DetailView
 from openpyxl import Workbook
-from .models import Profile, Appends, Decision
-from .forms import ProfileEditForm, CustomUserCreationForm, AppendsEditForm
+from .models import Profile, Appends, Decision, News, Photo
+from .forms import ProfileEditForm, CustomUserCreationForm, AppendsEditForm, NewForm
 from io import BytesIO
+
 
 def login_view(request: HttpRequest):
     if request.method == "GET":
@@ -290,3 +292,29 @@ class DownloadTableView(View):
         response['Content-Disposition'] = 'attachment; filename="filtered_table.xlsx"'
 
         return response
+
+class CreateNew(LoginRequiredMixin, CreateView):
+    model = News
+    fields = ["type", "name", "article", "avatar", "document"]
+    template_name = "myauth/create_news.html"
+    success_url = reverse_lazy("myauth:about-me")
+    def form_valid(self, form):
+        is_event = self.request.POST.get("is_event")
+        if is_event == "on":
+            form.instance.type = "Мероприятие"
+        else:
+            form.instance.type = "Новость"
+        return super().form_valid(form)
+
+    def post(self, request, *args, **kwargs):
+        form = self.get_form()
+        photo_files = request.FILES.getlist('photos')  # Получаем список загруженных файлов фотографий
+        if form.is_valid():
+            self.object = form.save()
+            for file in photo_files:
+                photo = Photo(image=file)
+                photo.save()
+                self.object.photos.add(photo)
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)

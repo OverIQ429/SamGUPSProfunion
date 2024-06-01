@@ -1,9 +1,20 @@
 from django import forms
-from .models import Profile, Appends, AllGroups
+from .models import Profile, Appends, AllGroups, News, Photo
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import User
 
+class PhotoForm(forms.ModelForm):
+    class Meta:
+        model = Photo
+        fields = ['image']
 
+class NewForm(forms.ModelForm):
+    class Meta:
+        model = News
+        exclude = ['created_at']
+        fields = ['type', 'name', 'article', 'avatar', 'document']
+        widgets = {'type': forms.CheckboxInput(),
+            'created_at': forms.DateTimeInput(attrs={'readonly': 'readonly'}),}
 class DateRangeForm(forms.Form):
     start_date = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
     end_date = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))

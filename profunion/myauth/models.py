@@ -46,3 +46,21 @@ class Appends(models.Model):
     decision = models.ForeignKey(Decision,null=True, on_delete=models.CASCADE)
     commentary = models.TextField(null=True, max_length=1000)
     created_at = models.DateTimeField(auto_now_add=True)
+
+class News_Type(models.Model):
+    text = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.text
+
+class Photo(models.Model):
+    image = models.ImageField(upload_to="photo")
+class News(models.Model):
+    type = models.ForeignKey(News_Type, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    article = models.TextField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    archived = models.BooleanField(default=False)
+    avatar = models.ImageField(upload_to='images')
+    images = models.ManyToManyField(Photo)
+    document = models.FileField(upload_to='document', null=True)

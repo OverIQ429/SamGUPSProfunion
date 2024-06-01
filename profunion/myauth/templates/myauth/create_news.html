@@ -1,0 +1,14 @@
+{% extends 'myauth/base.html' %}
+
+{% block title %}
+    Создать
+{% endblock %}
+
+{% block body %}
+     <h1>Создать Новость</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Создать</button>
+        </form>
+{% endblock %}
