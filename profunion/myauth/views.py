@@ -298,13 +298,6 @@ class CreateNew(LoginRequiredMixin, CreateView):
     fields = ["type", "name", "article", "avatar", "document"]
     template_name = "myauth/create_news.html"
     success_url = reverse_lazy("myauth:about-me")
-    def form_valid(self, form):
-        is_event = self.request.POST.get("is_event")
-        if is_event == "on":
-            form.instance.type = "Мероприятие"
-        else:
-            form.instance.type = "Новость"
-        return super().form_valid(form)
 
     def post(self, request, *args, **kwargs):
         form = self.get_form()

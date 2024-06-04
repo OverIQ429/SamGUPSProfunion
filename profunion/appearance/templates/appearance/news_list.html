@@ -1,20 +1,46 @@
 {% extends 'appearance/base.html' %}
+
+
 {% block title %}
     Новости
 {% endblock %}
 
 {% block body %}
+    <style>
+        .NewBlock{
+             display: flex; /* Убедитесь, что это свойство присутствует */
+             flex-wrap: wrap; /* Элементы будут идти слева направо */
+             justify-content: center; /* Выравнивание элементов по горизонтали */
+             align-items: center; /* Выравнивание элементов по вертикали */
+             margin-bottom: 10px;
+        }
+
+        .New{
+            border: 1px solid rgba(0, 0, 0, 0.5);
+            margin: 5px; /* Добавляет пространство вокруг каждого блока */
+            width: calc(25% - 10px); /* Рассчитывает ширину каждого блока, вычитая margin */
+            box-sizing: border-box;
+        }
+
+        .news-photo {
+            border: 1px solid rgba(0, 0, 0, 0.5);
+            max-width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+    </style>
+
     <h1>Новости провсоюза</h1>
     {% if news %}
-        <div>
+        <div class="NewBlock">
             {% for new in news %}
-                <div>
+                <div class="New">
                     <h3>{{ new.name }}</h3>
-                    <p>{{ new.article|slice:":45" }}{% if new.article|length > 45 %}...{% endif %}</p>
                     <p>{{ new.created_at }}</p>
-                    {% if new.photos %}
-                        <img src="{{ new.photos.url }}" alt="Фотография новости">
+                    {% if new.avatar %}
+                        <img src="{{ new.avatar.url }}" alt="Фотография новости" class="news-photo">
                     {% endif %}
+                    <p>{{ new.article|slice:":45" }}{% if new.article|length > 45 %}...{% endif %}</p>
                      <div>
                          <a href="{% url 'appearance:new_details' pk=new.pk  %}">Читать статью</a>
                      </div>
