@@ -12,7 +12,7 @@ from openpyxl import Workbook
 from .models import Profile, Appends, Decision, News, Photo
 from .forms import ProfileEditForm, CustomUserCreationForm, AppendsEditForm, NewForm
 from io import BytesIO
-
+from django.db.models import Q
 
 def login_view(request: HttpRequest):
     if request.method == "GET":
@@ -195,7 +195,7 @@ class ReportofProfiles(UserPassesTestMixin, ListView):
         course = self.request.GET.get('course')
         faculty = self.request.GET.get('faculty')
         group_id = self.request.GET.get('group')
-        name = self.request.GET.get('name')
+        username = self.request.GET.get('username')
 
         if start_date:
             queryset = queryset.filter(
@@ -204,13 +204,15 @@ class ReportofProfiles(UserPassesTestMixin, ListView):
             queryset = queryset.filter(
                 profile__created_at__lte=end_date)
         if course:
-            queryset = queryset.filter(profile__course__icontains=course)
+            queryset = queryset.filter(profile__group__course__icontains=course)
         if faculty:
-            queryset = queryset.filter(profile__faculty__icontains=faculty)
+            queryset = queryset.filter(profile__group__faculty__icontains=faculty)
         if group_id:
             queryset = queryset.filter(profile__group_id=group_id)
-        if name:
-            queryset = queryset.filter(profile__user__name__icontains=name)
+        if username:
+            queryset = queryset.filter(Q(profile__user__username__icontains=username) |
+                                       Q(profile__user__first_name__icontains=username) |
+                                       Q(profile__user__last_name__icontains=username))
         return queryset
 
 

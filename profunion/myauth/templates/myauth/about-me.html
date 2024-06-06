@@ -23,15 +23,17 @@
     {% endif %}<br><br>
   </div>
   <div>
-    <h3>Заявления</h3>
-    {% if appends %}
-      <ul>
-        {% for append in appends %}
-          <li>{{ append.description }} {{ append.decision }}</li>
-        {% endfor %}
-      </ul>
-    {% else %}
-    <p>У вас нет активных заявок</p>
+    {% if user.groups.exists %}
+      <h3>Заявления</h3>
+      {% if appends %}
+        <ul>
+          {% for append in appends %}
+            <li>{{ append.description }} {{ append.decision }}</li>
+          {% endfor %}
+        </ul>
+      {% else %}
+      <p>У вас нет активных заявок</p>
+      {% endif %}
     {% endif %}
   </div>
   {% else %}
