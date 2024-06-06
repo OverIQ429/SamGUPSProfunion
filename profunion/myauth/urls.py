@@ -1,7 +1,7 @@
 from django.contrib.auth.views import LoginView
 from django.urls import path
 
-from .views import (delete_append, AboutMeView, RegisterView, logout_view, AvatarUpdateView, UsersList, UserDetail, Create_Append, All_Appends, CheckAppens, Check_All_Appends, MyAppends, ReportofProfiles, DownloadTableView, CreateNew)
+from .views import (delete_append,DownloadTableAppendView, ReportofAppends, AboutMeView, RegisterView, logout_view, AvatarUpdateView, UsersList, UserDetail, Create_Append, All_Appends, CheckAppens, Check_All_Appends, MyAppends, ReportofProfiles, DownloadTableView, CreateNew)
 
 app_name = "myauth"
 
@@ -26,7 +26,9 @@ urlpatterns = [
     path("appends_list/", Check_All_Appends.as_view(), name="check_all_appends"),
     path("my_appends/", MyAppends.as_view(), name="my_appends"),
     path("report/", ReportofProfiles.as_view(), name="report_users"),
+    path("report/order/", ReportofAppends.as_view(), name="report_users"),
     path('append/<int:append_id>/delete/', delete_append, name='delete_append'),
     path('report/download_table/', DownloadTableView.as_view(), name='download_table'),
+    path('report/order/download_table/', DownloadTableAppendView.as_view(), name='download_table'),
     path('create/', CreateNew.as_view(), name='create_news')
 ]

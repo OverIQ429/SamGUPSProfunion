@@ -295,6 +295,109 @@ class DownloadTableView(View):
 
         return response
 
+class ReportofAppends(UserPassesTestMixin, ListView):
+    def test_func(self):
+        if self.request.user.is_staff:
+            return True
+
+    template_name = "myauth/order_report_list.html"
+    context_object_name = "appends"
+    queryset = Appends.objects.all()
+
+    def get_queryset(self):
+        queryset = Appends.objects.all()
+
+        start_date = self.request.GET.get('start_date')
+        end_date = self.request.GET.get('end_date')
+        description = self.request.GET.get('description')
+        username = self.request.GET.get('username')
+        decision = self.request.GET.get('decision')
+
+        if start_date:
+            queryset = queryset.filter(
+                created_at__gte=start_date)
+        if end_date:
+            queryset = queryset.filter(
+                created_at__lte=end_date)
+        if description:
+            queryset = queryset.filter(description__text__icontains=description)
+        if decision:
+            queryset = queryset.filter(decision__text__icontains=decision)
+        if username:
+            queryset = queryset.filter(Q(user__username__icontains=username))
+        return queryset
+
+
+    def get(self, request, *args, **kwargs):
+        if 'excel' in request.GET:
+            response = HttpResponse(content_type='application/ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="profiles.xlsx"'
+            wb = Workbook()
+            ws = wb.active
+            ws.append(['Имя Пользователя', 'Назавние', 'Решение', 'Дата подачи'])
+
+            for append in self.get_queryset():
+                username = append.user.username
+                description = append.description.text if append.description else ''
+                decision = append.decision.text if append.decision else ''
+                created_at = append.created_at.strftime('%Y-%m-%d %H:%M:%S')
+                ws.append([username, description, decision, created_at])
+
+            wb.save(response)
+            return response
+
+        return super().get(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if 'start_date' in self.request.GET:
+            context['start_date'] = self.request.GET['start_date']
+        if 'end_date' in self.request.GET:
+            context['end_date'] = self.request.GET['end_date']
+        if 'group' in self.request.GET:
+            context['group'] = self.request.GET['group']
+        return context
+
+
+class DownloadTableAppendView(View):
+    def get(self, request, *args, **kwargs):
+        queryset = Appends.objects.all()
+
+        start_date = request.GET.get('start_date')
+        end_date = request.GET.get('end_date')
+
+        if start_date:
+            queryset = queryset.filter(profile__created_at__gte=start_date)
+        if end_date:
+            queryset = queryset.filter(profile__created_at__lte=end_date)
+
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="appends_table.csv"'
+
+        wb = Workbook()
+        ws = wb.active
+        ws.append(['Имя пользователя', 'Описание', 'Файл', 'Решение', 'Комментарий', 'Дата создания'])
+
+        for append in queryset:
+            username = append.user.username
+            description = append.description.text if append.description else ''  # Предполагаем, что у Description есть поле text
+            file_url = request.build_absolute_uri(append.file.url) if append.file else ''
+            decision = append.decision.text if append.decision else ''  # Предполагаем, что у Decision есть поле text
+            commentary = append.commentary
+            created_at = append.created_at.strftime('%Y-%m-%d %H:%M:%S')
+
+            ws.append([username, description, file_url, decision, commentary, created_at])
+
+        output = BytesIO()
+        wb.save(output)
+        output.seek(0)
+
+        response = HttpResponse(output,
+                                content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        response['Content-Disposition'] = 'attachment; filename="appends_table.xlsx"'
+
+        return response
+
 class CreateNew(LoginRequiredMixin, CreateView):
     model = News
     fields = ["type", "name", "article", "avatar", "document"]

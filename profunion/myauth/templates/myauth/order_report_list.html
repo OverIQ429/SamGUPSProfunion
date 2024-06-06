@@ -1,0 +1,89 @@
+{% extends 'myauth/base.html' %}
+
+{% block title %}
+    Отчет
+{% endblock %}
+{% block head %}
+<style>
+    .table {
+        width: 100%;
+        border: none;
+        margin-bottom: 20px;
+    }
+    .table thead th {
+        font-weight: bold;
+        text-align: left;
+        border: none;
+        padding: 10px 15px;
+        background: #d8d8d8;
+        font-size: 14px;
+        border-left: 1px solid #ddd;
+        border-right: 1px solid #ddd;
+    }
+    .table tbody td {
+        text-align: left;
+        border-left: 1px solid #ddd;
+        border-right: 1px solid #ddd;
+        padding: 10px 15px;
+        font-size: 14px;
+        vertical-align: top;
+    }
+    .table thead tr th:first-child, .table tbody tr td:first-child {
+        border-left: none;
+    }
+    .table thead tr th:last-child, .table tbody tr td:last-child {
+        border-right: none;
+    }
+    .table tbody tr:nth-child(even){
+        background: #f3f3f3;
+    }
+    </style>
+{% endblock %}
+{% block body %}
+<p>Фильтры</p>
+<form method="get">
+    <label for="start_date">Начальная дата:</label>
+    <input type="date" id="start_date" name="start_date">
+
+    <label for="end_date">Конечная дата:</label>
+    <input type="date" id="end_date" name="end_date">
+
+    <label for="description">Описание:</label>
+    <input type="text" id="description" name="description" placeholder="Описание">
+
+    <label for="username">Пользователь:</label>
+    <input type="text" id="username" name="username" placeholder="Имя пользователя">
+
+    <label for="decision">Решение:</label>
+    <input type="text" id="decision" name="decision" placeholder="Решение">
+
+    <button type="submit">Применить фильтры</button>
+    <a href="?">Сбросить фильтры</a>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Имя Пользователя</th>
+            <th>Описание</th>
+            <th>Решение</th>
+            <th>Дата подачи</th>
+        </tr>
+    </thead>
+    {% for append in appends %}
+    <tbody>
+        <tr>
+            <td>{{ append.user.username }}</td>
+            <td>{{ append.description.text }}</td>
+            <td>{{ append.decision.text }}</td>
+            <td>{{ append.created_at }}</td>
+        </tr>
+    </tbody>
+    {% empty %}
+    <tr>
+        <td colspan="4">Нет данных для отображения</td>
+    </tr>
+    {% endfor %}
+</table>
+<a href="{% url 'myauth:download_table' %}?{{ request.GET.urlencode }}">Скачать таблицу</a>
+{% endblock %}
