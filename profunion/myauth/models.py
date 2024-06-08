@@ -21,8 +21,11 @@ class AllGroups(models.Model):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    name = models.CharField(null=True, max_length=14)
+    lastname = models.CharField(null=True, max_length=14)
+    secondname = models.CharField(null=True, max_length=14)
     group = models.ForeignKey(AllGroups,null=True, on_delete=models.CASCADE )
-    email = models.EmailField( null=True, max_length=254)
+    email = models.EmailField(null=True, max_length=254)
     phone_number = models.CharField(validators=[phone_regex],null=True, max_length=12)
     agreement_accepted = models.BooleanField(default=False)
     avatar = models.ImageField(null=True, blank=True, upload_to=user_avatar_directory_path)

@@ -6,12 +6,70 @@
 
 
 {% block body %}
-<section>
+<style>
+  /* Основные стили для раздела */
+.dates {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dates h1, .dates h3 {
+  color: #333;
+  border-bottom: 2px solid #eaeaea;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.dates p {
+  color: #666;
+  line-height: 1.6;
+}
+
+/* Стили для информации о пользователе */
+.dates div {
+  background-color: #fff;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+}
+
+/* Стили для списка заявлений */
+.dates ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.dates li {
+  background-color: #e9ffe9;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-left: 4px solid #4caf50;
+}
+
+/* Стили для изображения аватара */
+.dates img {
+  width: 100px;
+  height: auto;
+  border-radius: 50%;
+  margin-top: 10px;
+}
+
+/* Стили для анонимного пользователя */
+.dates h2 {
+  color: #999;
+  text-align: center;
+}
+</style>
+<section class="dates">
   <h1>Личные данные</h1>
   {% if user.is_authenticated %}
   <div>
-    <p>Имя: {{ user.username }}</p>
-    <p>Фамилия: {{ user.first_name }}</p>
+    <p>Имя: {{ user.profile.name }}</p>
+    <p>Фамилия: {{ user.profile.lastname }}</p>
+    <p>Отчество: {{ user.profile.secondname }}</p>
     <p>Группа: {{ user.profile.group.groupname }}</p>
     <p>Почта: {{ user.profile.email }}</p>
     <p>Телефон: {{ user.profile.phone_number }}</p>

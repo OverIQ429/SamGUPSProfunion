@@ -60,6 +60,7 @@
     <filter-actions connection-id="0dcbd2d5-4e7e-4371-9ee0-567e41db97d4" dataset="main.django_admin_log" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="0dcbd2d5-4e7e-4371-9ee0-567e41db97d4" dataset="main.auth_user" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="0dcbd2d5-4e7e-4371-9ee0-567e41db97d4" dataset="main.myauth_news_type" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="0dcbd2d5-4e7e-4371-9ee0-567e41db97d4" dataset="main.myauth_photo" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="0dcbd2d5-4e7e-4371-9ee0-567e41db97d4" dataset="main.auth_user_groups" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="0dcbd2d5-4e7e-4371-9ee0-567e41db97d4" dataset="main.sqlite_sequence" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="0dcbd2d5-4e7e-4371-9ee0-567e41db97d4" dataset="main.myauth_description" active-filter-id="EMPTY_FILTER" />

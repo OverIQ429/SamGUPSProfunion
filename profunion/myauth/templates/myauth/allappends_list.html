@@ -5,8 +5,53 @@
 {% endblock %}
 
 {% block body %}
+<style>
+  .user-table {
+    width: 100%; /* Ширина таблицы */
+    border-collapse: collapse; /* Убрать двойные границы */
+    margin-top: 20px; /* Отступ сверху */
+}
+
+/* Стили для заголовков таблицы */
+.user-table th {
+    background-color: #4CAF50; /* Зелёный цвет фона заголовков */
+    color: white; /* Белый цвет текста */
+    padding: 12px; /* Внутренние отступы */
+    border: 1px solid #ddd; /* Граница ячеек */
+}
+
+/* Стили для ячеек таблицы */
+.user-table td {
+    padding: 8px; /* Внутренние отступы */
+    border: 1px solid #ddd; /* Граница ячеек */
+    text-align: left; /* Выравнивание текста по левому краю */
+}
+
+/* Стили для строк таблицы при наведении */
+.user-table tr:hover {
+    background-color: #f5f5f5; /* Светло-серый цвет фона при наведении */
+}
+
+/* Стили для ссылок в таблице */
+.user-table a {
+    color: #2196F3; /* Синий цвет текста */
+    text-decoration: none; /* Убрать подчёркивание текста */
+}
+
+/* Стили для пустой таблицы */
+.user-table .empty-list {
+    text-align: center; /* Выравнивание текста по центру */
+    padding: 20px; /* Внутренние отступы */
+    background-color: #ffdddd; /* Красный цвет фона */
+}
+
+  h1 {
+    text-align: center; /* Выравнивание по центру */
+    font-weight: bold; /* Жирный шрифт */
+}
+</style>
   <h1>Список заявлений</h1>
-  <table>
+  <table class="user-table">
     <tr>
       <th>Пользователь</th>
       <th>Тип заявления</th>
@@ -14,14 +59,11 @@
       <th>Состояние</th>
      </tr>
     {% for append in appends %}
-        <tr>
-          <td>{{ append.user }}</td>
+        <tr onclick="window.location='{% url 'myauth:check_appends' pk=append.pk %}';">
+          <td>{{ append.user.profile.name }} {{ append.user.profile.name }}</td>
           <td>{{ append.description.text }}</td>
           <td>{{ append.created_at }}</td>
           <td>{{ append.decision.text }}</td>
-          <td>
-            <a href="{% url 'myauth:check_appends' append.pk %}">Посмотреть заявление</a>
-          </td>
         </tr>
 
     {% empty %}

@@ -6,6 +6,11 @@ from django.views.generic import ListView
 
 from myauth.models import News
 
+class Index(ListView):
+    template_name = 'appearance/index.html'
+    model = News
+    context_object_name = "news"
+
 class NewsView(ListView):
     template_name = 'appearance/news_list.html'
     model = News

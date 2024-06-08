@@ -35,13 +35,16 @@ class AppendsEditForm(forms.ModelForm):
         fields = ("file",'commentary','decision',)
 
 class CustomUserCreationForm(UserCreationForm):
-    email = forms.EmailField(required=True)
-    phone_number = forms.CharField(required=False)
-    group = forms.ModelChoiceField(queryset=AllGroups.objects.all(), required=False)
+    email = forms.EmailField(label='Почта',required=True)
+    phone_number = forms.CharField(label='Телефон',required=False)
+    group = forms.ModelChoiceField(label='Группа',queryset=AllGroups.objects.all(), required=False)
+    name = forms.CharField(label='Имя',required=False)
+    lastname = forms.CharField(label='Фамилия',required=False)
+    secondname = forms.CharField(label='Отчество',required=False)
 
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = UserCreationForm.Meta.fields + ('email', 'phone_number','group',)
+        fields = UserCreationForm.Meta.fields + ('name','lastname','secondname','email', 'phone_number','group',)
 
 class ReportUsersFilterForm(forms.Form):
     faculty = forms.CharField(label='Факультет', max_length=100)

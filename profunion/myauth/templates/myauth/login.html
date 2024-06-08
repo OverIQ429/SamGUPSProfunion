@@ -5,6 +5,54 @@
 {% endblock %}
 
 {% block body %}
+<style>
+    /* Основные стили для формы */
+.form-login {
+    max-width: 400px; /* Максимальная ширина формы */
+    margin: 50px auto; /* Центрирование формы на странице */
+    padding: 20px; /* Внутренние отступы */
+    background-color: #f3f3f3; /* Цвет фона формы */
+    border-radius: 8px; /* Скругление углов формы */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Тень формы */
+}
+
+/* Стили для элементов формы */
+.form-login input[type="text"],
+.form-login input[type="password"] {
+    width: 100%; /* Ширина полей ввода */
+    padding: 10px; /* Внутренние отступы */
+    margin-bottom: 20px; /* Отступ снизу */
+    border: 1px solid #ddd; /* Граница полей ввода */
+    border-radius: 4px; /* Скругление углов полей ввода */
+}
+
+/* Стили для кнопки "Войти" */
+.form-login button {
+    width: 100%; /* Ширина кнопки */
+    padding: 10px; /* Внутренние отступы */
+    border: none; /* Убрать границу */
+    border-radius: 4px; /* Скругление углов кнопки */
+    background-color: #5cb85c; /* Зелёный цвет фона кнопки */
+    color: white; /* Белый цвет текста */
+    cursor: pointer; /* Курсор в виде руки при наведении */
+    font-size: 18px; /* Размер шрифта */
+}
+
+/* Стили для ссылки "Регистрация" */
+.form-login a {
+    display: inline-block; /* Делаем ссылку блочно-строчным элементом */
+    margin-top: 20px; /* Отступ сверху */
+    text-decoration: none; /* Убрать подчёркивание текста */
+    color: #5cb85c; /* Цвет текста */
+    font-size: 16px; /* Размер шрифта */
+}
+
+/* Стили для изменения вида кнопки при наведении */
+.form-login button:hover {
+    background-color: #449d44; /* Темно-зелёный цвет фона при наведении */
+}
+</style>
+<div class="form-login">
     <form method="post">
         {% csrf_token %}
 
@@ -12,6 +60,7 @@
 
         <button type="submit">Войти</button>
     </form>
-
     <a href="{% url 'myauth:register' %}">Регистрация</a>
+</div>
+
 {% endblock %}

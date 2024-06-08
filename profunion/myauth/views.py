@@ -63,6 +63,9 @@ class RegisterView(CreateView):
         profile = Profile.objects.create(user=self.object)
         profile.email = form.cleaned_data.get("email")
         profile.phone_number = form.cleaned_data.get("phone_number")
+        profile.name = form.cleaned_data.get("name")
+        profile.secondname = form.cleaned_data.get("secondname")
+        profile.lastname = form.cleaned_data.get("lastname")
         profile.save()
         username = form.cleaned_data.get("username")
         password = form.cleaned_data.get("password1")
@@ -99,6 +102,21 @@ class UsersList(UserPassesTestMixin, ListView):
     template_name = "myauth/users_list.html"
     context_object_name = "profiles"
     queryset = User.objects.all()
+
+    def get_queryset(self):
+        queryset = super().get_queryset().exclude(is_superuser=True)
+
+        name = self.request.GET.get('name')
+
+        if name:
+            queryset = queryset.filter(Q(profile__name__icontains=name) |
+                                       Q(profile__user__lastname__icontains=name) |
+                                       Q(profile__user__second__icontains=name)|
+                                       Q(profile__user__email__icontains=name)|
+                                       Q(profile__user__group__icontains=name)|
+                                       Q(profile__user__group__faculty__icontains=name)|
+                                       Q(profile__user__group__course__icontains=name))
+        return queryset
 
 class UserDetail(UserPassesTestMixin, DetailView):
     def test_func(self):
