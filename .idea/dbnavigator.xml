@@ -42,7 +42,9 @@
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files />
+    <open-files>
+      <object connection-id="0dcbd2d5-4e7e-4371-9ee0-567e41db97d4" object-ref="schemas/main/tables/myauth_profile" />
+    </open-files>
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="0dcbd2d5-4e7e-4371-9ee0-567e41db97d4" />
@@ -52,6 +54,7 @@
     <filter-actions connection-id="0dcbd2d5-4e7e-4371-9ee0-567e41db97d4" dataset="main.django_migrations" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="0dcbd2d5-4e7e-4371-9ee0-567e41db97d4" dataset="main.myauth_allgroups" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="0dcbd2d5-4e7e-4371-9ee0-567e41db97d4" dataset="main.myauth_news_images" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="0dcbd2d5-4e7e-4371-9ee0-567e41db97d4" dataset="main.auth_group_permissions" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="0dcbd2d5-4e7e-4371-9ee0-567e41db97d4" dataset="main.myauth_appends" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="0dcbd2d5-4e7e-4371-9ee0-567e41db97d4" dataset="main.appearance_news" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="0dcbd2d5-4e7e-4371-9ee0-567e41db97d4" dataset="main.django_content_type" active-filter-id="EMPTY_FILTER" />
@@ -63,6 +66,7 @@
     <filter-actions connection-id="0dcbd2d5-4e7e-4371-9ee0-567e41db97d4" dataset="main.myauth_photo" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="0dcbd2d5-4e7e-4371-9ee0-567e41db97d4" dataset="main.auth_user_groups" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="0dcbd2d5-4e7e-4371-9ee0-567e41db97d4" dataset="main.sqlite_sequence" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="0dcbd2d5-4e7e-4371-9ee0-567e41db97d4" dataset="main.auth_group" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="0dcbd2d5-4e7e-4371-9ee0-567e41db97d4" dataset="main.myauth_description" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="0dcbd2d5-4e7e-4371-9ee0-567e41db97d4" dataset="main.myauth_decision" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="0dcbd2d5-4e7e-4371-9ee0-567e41db97d4" dataset="main.myauth_applications" active-filter-id="EMPTY_FILTER" />

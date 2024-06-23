@@ -5,6 +5,61 @@
 {% endblock %}
 
 {% block body %}
+<style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+  }
+
+  /* Стилизация заголовка заявки */
+  h3 {
+      color: #333;
+      margin-bottom: 20px;
+  }
+
+  /* Стилизация формы */
+  form {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      padding: 20px;
+      border-radius: 5px;
+  }
+
+  /* Стилизация кнопки отправки */
+  button {
+      background-color: #5cb85c;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+  }
+
+  button:hover {
+      background-color: #4cae4c;
+  }
+
+  /* Стилизация полей формы */
+  form p {
+      margin-bottom: 10px;
+  }
+
+  /* Улучшение видимости текстовых полей */
+  input[type='text'],
+  input[type='email'],
+  textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      box-sizing: border-box; /* Убедитесь, что поля не выходят за пределы контейнера */
+  }
+</style>
   <h3>Заявка пользователя  </b></h3><br>
   <div>
     <form method="post">

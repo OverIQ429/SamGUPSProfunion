@@ -6,34 +6,76 @@
 
 
 {% block body %}
+<style>
+    body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 20px;
+}
+
+/* Стили для блоков с содержимым */
+.div-content {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+/* Стили для изображений */
+.div-content img {
+  width: 50px; /* Измените размер в соответствии с вашими нуждами */
+  height: auto;
+  margin-right: 10px;
+}
+
+/* Стили для ссылок */
+.div-content a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Стили для заголовков ссылок */
+.div-content a:hover {
+  text-decoration: underline;
+}
+
+</style>
     {% if user.groups.exists and user.groups.first.name == 'Not union group' %}
-        <div>
-            <img src="profunion/uploads/photo/free-icon-google-docs-2991106.png" alt="">
+        <div class="div-content">
+  <img src="path_to_your_image.png" alt="">
             <a href="\uploads\appends_all\obrazec_zayavleniya_na_vstuplenie_v_profsouz.docx" download="Заявление на вступление в профсоюз">Заявление на вступление в профсоюз </a>
         </div>
     {% endif %}
     {% if user.groups.exists and user.groups.first.name == 'Union Members' %}
-        <div>
-            <img src="C:\Users\maksi\PycharmProjects\SamGUPSProfunion\profunion\uploads\photo\free-icon-google-docs-2991106.png" alt=" ">
+        <div class="div-content">
+            <img src="path_to_your_image.png" alt="">
             <a href="\uploads\appends_all\Zayavlenie-na-vykhod-iz-profsoyuza (2).doc" download="Заявление о предоставлении стипендий для активных членов профсоюза">Заявление о предоставлении стипендий для активных членов профсоюза </a>
         </div>
-        <div>
-            <img src="C:\Users\maksi\Downloads\free-icon-google-docs-2991106.png" alt="">
+       <div class="div-content">
+  <img src="path_to_your_image.png" alt="">
             <a href="\uploads\appends_all\Zayavlenie-na-vykhod-iz-profsoyuza (2).doc" download="Заявление о финансовой поддержке студентов в период сессии или научных конференций.">Заявление о финансовой поддержке студентов в период сессии или научных конференций </a>
         </div>
-        <div>
+        <div class="div-content">
+  <img src="path_to_your_image.png" alt="">
             <a href="\uploads\appends_all\Zayavlenie-na-vykhod-iz-profsoyuza (2).doc" download="Заявление о создании условий для общежития для студентов из других городов">Заявление о создании условий для общежития для студентов из других городов </a>
         </div>
-        <div>
+        <div class="div-content">
+  <img src="path_to_your_image.png" alt="">
             <a href="\uploads\appends_all\Zayavlenie-na-vykhod-iz-profsoyuza (2).doc" download="Заявление о компенсации расходов на проезд к месту учёбы для не-резидентов">Заявление о компенсации расходов на проезд к месту учёбы для не-резидентов </a>
         </div>
-        <div>
+        <div class="div-content">
+  <img src="path_to_your_image.png" alt="">
             <a href="\uploads\appends_all\Zayavlenie-na-vykhod-iz-profsoyuza (2).doc" download="Заявление о проведении культурных и спортивных мероприятий для студентов">Заявление о проведении культурных и спортивных мероприятий для студентов </a>
         </div>
-        <div>
+        <div class="div-content">
+  <img src="path_to_your_image.png" alt="">
             <a href="\uploads\appends_all\Zayavlenie-na-vykhod-iz-profsoyuza (2).doc" download="Заявление о предоставлении льгот на питание в столовой университета">Заявление о предоставлении льгот на питание в столовой университета </a>
         </div>
-        <div>
+        <div class="div-content">
+  <img src="path_to_your_image.png" alt="">
             <a href="\uploads\appends_all\Zayavlenie-na-vykhod-iz-profsoyuza (2).doc" download="Заявление на выход из профсоюза">Заявление на выход из профсоюза </a>
         </div>
     {% endif %}

@@ -7,11 +7,15 @@
 {% block body %}
 <style>
   .user-table {
-    width: 100%; /* Ширина таблицы */
+    width: 60%; /* Установите ширину таблицы на 60%, чтобы оставить по 20% с каждой стороны */
+    margin-left: auto; /* Автоматический отступ слева */
+    margin-right: auto;
     border-collapse: collapse; /* Убрать двойные границы */
     margin-top: 20px; /* Отступ сверху */
 }
-
+  .filter-container {
+    margin-left: 20%; /* Отступ слева */
+}
 /* Стили для заголовков таблицы */
 .user-table th {
     background-color: #4CAF50; /* Зелёный цвет фона заголовков */
@@ -51,7 +55,7 @@
 }
 </style>
   <h1>Список членов профсоюза</h1>
-  <form method="get">
+  <form method="get" class="filter-container">
     <input type="text" name="name" placeholder="Поиск по имени">
     </select>
 

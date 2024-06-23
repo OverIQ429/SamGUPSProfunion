@@ -6,12 +6,60 @@
 
 
 {% block body %}
+<style>
+    body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    color: #333;
+}
+
+/* Стили для формы */
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+input[type="submit"] {
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+input[type="submit"]:hover {
+    background-color: #4cae4c;
+}
+
+/* Стили для поля загрузки файла */
+input[type="file"] {
+    border: 1px solid #ddd;
+    padding: 10px;
+    width: calc(100% - 22px); /* Вычитаем padding и border */
+}
+
+/* Добавляем отступы для элементов формы */
+.form-group {
+    margin-bottom: 15px;
+}
+</style>
   <h1>Заявление</h1>
     <div>
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
-            <input type="submit" value="Register">
+            <input type="submit" value="Отправить">
         </form>
     </div>
 {% endblock %}

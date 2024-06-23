@@ -5,6 +5,65 @@
 {% endblock %}
 
 {% block body %}
+<style>
+    /* Основные стили страницы */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Стилизация заголовка страницы */
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Стилизация формы */
+form {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+    max-width: 500px;
+    margin: auto;
+}
+
+/* Стилизация кнопки отправки */
+button {
+    background-color: #008cba;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #005f6b;
+}
+
+/* Стилизация полей формы */
+form p {
+    margin-bottom: 15px;
+}
+
+/* Улучшение видимости текстовых полей */
+input[type='text'],
+input[type='email'],
+input[type='file'],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* Убедитесь, что поля не выходят за пределы контейнера */
+}
+</style>
      <h1>Создать Новость</h1>
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}

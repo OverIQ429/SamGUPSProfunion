@@ -3,7 +3,7 @@
 {% block title %}
     Отчет
 {% endblock %}
-{% block head %}
+{% block body %}
 <style>
     .table {
         width: 100%;
@@ -37,53 +37,130 @@
     .table tbody tr:nth-child(even){
         background: #f3f3f3;
     }
+
+    .container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Стили для формы фильтров */
+        .filters {
+            width: 20%; /* Задаём ширину для колонки с фильтрами */
+            margin-left: 20px; /* Добавляем отступ слева */
+        }
+
+        /* Стили для таблицы */
+        .table-container {
+            width: 75%; /* Задаём ширину для колонки с таблицей */
+        }
+
+        /* Обновляем стили для таблицы */
+        .table {
+            width: 100%;
+            /* Остальные стили остаются без изменений */
+        }
+
+        /* Добавляем стили для кнопок и полей ввода */
+        input[type="date"],
+        input[type="text"],
+        select,
+        button,
+        a {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 8px;
+            box-sizing: border-box; /* Учитываем padding и border в ширине элемента */
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .link-button {
+            display: inline-block;
+            padding: 10px 15px;
+            margin: 5px 0;
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .link-button:hover {
+            background-color: #0056b3;
+        }
+
     </style>
-{% endblock %}
-{% block body %}
-<p>Фильтры</p>
-<form method="get">
-    <label for="start_date">Начальная дата:</label>
-    <input type="date" id="start_date" name="start_date">
+<div class="container">
+    <div class="filters">
+        <p>Фильтры</p>
+        <form method="get">
+            <label for="start_date">Начальная дата:</label>
+            <input type="date" id="start_date" name="start_date">
 
-    <label for="end_date">Конечная дата:</label>
-    <input type="date" id="end_date" name="end_date">
+            <label for="end_date">Конечная дата:</label>
+            <input type="date" id="end_date" name="end_date">
 
-    <label for="description">Описание:</label>
-    <input type="text" id="description" name="description" placeholder="Описание">
+            <label for="description">Описание:</label>
+            <input type="text" id="description" name="description" placeholder="Описание">
 
-    <label for="username">Пользователь:</label>
-    <input type="text" id="username" name="username" placeholder="Имя пользователя">
+            <label for="username">Пользователь:</label>
+            <input type="text" id="username" name="username" placeholder="Имя пользователя">
 
-    <label for="decision">Решение:</label>
-    <input type="text" id="decision" name="decision" placeholder="Решение">
+            <label for="decision">Решение:</label>
+            <input type="text" id="decision" name="decision" placeholder="Решение">
 
-    <button type="submit">Применить фильтры</button>
-    <a href="?">Сбросить фильтры</a>
-</form>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>Имя Пользователя</th>
-            <th>Описание</th>
-            <th>Решение</th>
-            <th>Дата подачи</th>
-        </tr>
-    </thead>
-    {% for append in appends %}
-    <tbody>
-        <tr>
-            <td>{{ append.user.username }}</td>
-            <td>{{ append.description.text }}</td>
-            <td>{{ append.decision.text }}</td>
-            <td>{{ append.created_at }}</td>
-        </tr>
-    </tbody>
-    {% empty %}
-    <tr>
-        <td colspan="4">Нет данных для отображения</td>
-    </tr>
-    {% endfor %}
-</table>
-<a href="{% url 'myauth:download_table' %}?{{ request.GET.urlencode }}">Скачать таблицу</a>
+            <button type="submit">Применить фильтры</button>
+            <a href="?" class="link-button">Сбросить фильтры</a>
+            <a href="{% url 'myauth:download_table' %}?{{ request.GET.urlencode }}" class="link-button">Скачать таблицу</a>
+            <a href="{% url 'myauth:report_users' %}" class="link-button">Отчет по пользователям</a>
+        </form>
+    </div>
+    <div class="table-container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Имя Пользователя</th>
+                    <th>Описание</th>
+                    <th>Решение</th>
+                    <th>Дата подачи</th>
+                </tr>
+            </thead>
+            {% for append in appends %}
+            <tbody>
+                <tr>
+                    <td>{{ append.user.username }}</td>
+                    <td>{{ append.description.text }}</td>
+                    <td>{{ append.decision.text }}</td>
+                    <td>{{ append.created_at }}</td>
+                </tr>
+            </tbody>
+            {% empty %}
+            <tr>
+                <td colspan="4">Нет данных для отображения</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
 {% endblock %}

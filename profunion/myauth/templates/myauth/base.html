@@ -58,6 +58,7 @@
         {% if user.groups.exists %}
             <a href="{% url 'myauth:create_append' pk=user.pk %}">Подать заявление</a>
             <a href="{% url 'myauth:my_appends' %}">Мои заявления</a>
+            <a href="{% url 'myauth:my_appends' %}">Телеграмм-бот</a>
         {% endif %}
         {% if user.is_superuser %}
             <a href="{% url 'myauth:report_users'%}">Отчёт</a>

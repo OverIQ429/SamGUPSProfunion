@@ -66,4 +66,4 @@ class News(models.Model):
     archived = models.BooleanField(default=False)
     avatar = models.ImageField(upload_to='images')
     images = models.ManyToManyField(Photo)
-    document = models.FileField(upload_to='document', null=True)
+    document = models.FileField(upload_to='document', null=True, blank=True)

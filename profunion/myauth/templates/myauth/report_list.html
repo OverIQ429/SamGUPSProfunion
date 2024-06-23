@@ -3,7 +3,8 @@
 {% block title %}
     Отчет
 {% endblock %}
-{% block head %}
+
+{% block body %}
 <style>
     .table {
         width: 100%;
@@ -37,68 +38,144 @@
     .table tbody tr:nth-child(even){
         background: #f3f3f3;
     }
+
+    .container {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Стили для формы фильтров */
+        .filters {
+            width: 20%; /* Задаём ширину для колонки с фильтрами */
+            margin-left: 20px; /* Добавляем отступ слева */
+        }
+
+        /* Стили для таблицы */
+        .table-container {
+            width: 75%; /* Задаём ширину для колонки с таблицей */
+        }
+
+        /* Обновляем стили для таблицы */
+        .table {
+            width: 100%;
+            /* Остальные стили остаются без изменений */
+        }
+
+        /* Добавляем стили для кнопок и полей ввода */
+        input[type="date"],
+        input[type="text"],
+        select,
+        button,
+        a {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 8px;
+            box-sizing: border-box; /* Учитываем padding и border в ширине элемента */
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .link-button {
+            display: inline-block;
+            padding: 10px 15px;
+            margin: 5px 0;
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .link-button:hover {
+            background-color: #0056b3;
+        }
     </style>
-{% endblock %}
-{% block body %}
-<p>Фильтры</p>
-<form method="get">
-    <label for="start_date">Начальная дата:</label>
-    <input type="date" id="start_date" name="start_date">
+<div class="container">
+    <div class="filters">
+        <p>Фильтры</p>
+        <form method="get">
+            <label for="start_date">Начальная дата:</label>
+            <input type="date" id="start_date" name="start_date">
 
-    <label for="end_date">Конечная дата:</label>
-    <input type="date" id="end_date" name="end_date">
+            <label for="end_date">Конечная дата:</label>
+            <input type="date" id="end_date" name="end_date">
 
-    <label for="course">Курс:</label>
-    <input type="text" id="course" name="course" placeholder="Курс">
+            <label for="course">Курс:</label>
+            <input type="text" id="course" name="course" placeholder="Курс">
 
-    <label for="faculty">Факультет:</label>
-    <input type="text" id="faculty" name="faculty" placeholder="Факультет">
+            <label for="faculty">Факультет:</label>
+            <input type="text" id="faculty" name="faculty" placeholder="Факультет">
 
-    <label for="group">Группа:</label>
-    <select id="group" name="group">
-        <option value="">Выберите группу</option>
-        <option value="1">ИВТб-01</option>
+            <label for="group">Группа:</label>
+            <select id="group" name="group">
+                <option value="">Выберите группу</option>
+                <option value="1">ИВТб-01</option>
 
-    <input type="text" name="username" placeholder="Поиск по имени">
-    </select>
+            <input type="text" name="username" placeholder="Поиск по имени">
+            </select>
 
-    <button type="submit">Применить фильтры</button>
-    <a href="?">Сбросить фильтры</a>
-
-</form>
-    <table class="table">
-        <thead>
-            <tr>
-              <th>Имя</th>
-              <th>Фамилия</th>
-              <th>Отчество</th>
-              <th>Почта</th>
-              <th>Группа</th>
-              <th>Факультет</th>
-              <th>Курс</th>
-              <th>Дата регистрации</th>
-              <th>Член профсоюза</th>
-            </tr>
-        </thead>
-    {% for user in profiles %}
-        <tbody>
-          <tr>
-            <td>{{ user.username }}</td>
-            <td>{{ user.first_name }}</td>
-            <td>{{ user.last_name }}</td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.profile.group }}</td>
-            <td>{{ user.profile.group.faculty }}</td>
-            <td>{{ user.profile.group.course }}</td>
-            <td>{{ user.profile.created_at }}</td>
-            <td>{{ user.profile.is_union_member }}</td>
-          </tr>
-        </tbody>
-    {% empty %}
-      <tr>
-        <td colspan="7">Лист пустой</td>
-      </tr>
-    {% endfor %}
-    <a href="{% url 'myauth:download_table' %}?{{ request.GET.urlencode }}">Скачать таблицу</a>
-  </table>
+            <button type="submit">Применить фильтры</button>
+            <a href="?" class="link-button">Сбросить фильтры</a>
+            <a href="{% url 'myauth:download_table' %}?{{ request.GET.urlencode }}" class="link-button">Скачать таблицу</a>
+            <a href="{% url 'myauth:report_appends' %}" class="link-button">Отчет по заявлениям</a>
+    </div>
+    <div class="table-container">
+        </form>
+            <table class="table">
+                <thead>
+                    <tr>
+                      <th>Имя</th>
+                      <th>Фамилия</th>
+                      <th>Отчество</th>
+                      <th>Почта</th>
+                      <th>Группа</th>
+                      <th>Факультет</th>
+                      <th>Курс</th>
+                      <th>Дата регистрации</th>
+                      <th>Член профсоюза</th>
+                    </tr>
+                </thead>
+            {% for user in profiles %}
+                <tbody>
+                  <tr>
+                    <td>{{ user.profile.name }}</td>
+                    <td>{{ user.profile.lastname }}</td>
+                    <td>{{ user.profile.secondname }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.profile.group }}</td>
+                    <td>{{ user.profile.group.faculty }}</td>
+                    <td>{{ user.profile.group.course }}</td>
+                    <td>{{ user.profile.created_at }}</td>
+                    <td>{{ user.profile.is_union_member }}</td>
+                  </tr>
+                </tbody>
+            {% empty %}
+              <tr>
+                <td colspan="7">Лист пустой</td>
+              </tr>
+            {% endfor %}
+          </table>
+    </div>
+</div>
 {% endblock %}

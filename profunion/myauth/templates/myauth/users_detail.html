@@ -5,29 +5,95 @@
 {% endblock %}
 
 {% block body %}
+  <style>
+    body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f4f4;
+    padding: 20px;
+}
 
-    <h1>User <strong>{{ user.username }} info </strong></h1>
+/* Стилизация заголовков */
+h1, h2, h3 {
+    color: #444;
+}
+
+/* Стилизация контейнера с информацией пользователя */
+.user-info {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+/* Стилизация изображения профиля */
+.profile-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+/* Стилизация списка заявлений */
+.appends-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.appends-list li {
+    background-color: #eee;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Стилизация ссылок */
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Стилизация кнопки 'Вернуться к списку' */
+.back-button {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: #0056b3;
+}
+  </style>
+  <div class="user-info">
+    <h1>Пользователь <strong>{{ user.profile.name }} </strong></h1>
       <h2>Detail</h2>
       <div>
-      <p>Username: {{ user.username }}</p>
-      <p>First name: {{ user.first_name }}</p>
-      <p>Last name: {{ user.last_name }}</p>
-      <p>Email: {{ user.email }}</p>
-      <p>Вступил в профсоюз: {{ user.profile.is_union_member }}</p>
-      <p>Avatar: {{ user.profile.url }}</p>
-        </div>
+      <p>Имя: {{ user.profile.name }}</p>
+      <p>Фамилия: {{ user.profile.lastname }}</p>
+      <p>Отчество: {{ user.profile.secondname }}</p>
+      <p>Email: {{ user.profile.email }}</p>
+      <p>Группа: {{ user.profile.group }}</p>
+      </div>
       {% if user.profile.avatar %}
 
         <img src="{{ user.profile.avatar.url }}" alt="{{ user.profile.avatar.name }}">
-      {% else %}
-          <div>Avatar not upload yet</div>
       {% endif %}
-      <div>
-      </div>
-      <div>
+
+  </div>
+  <div>
         <h3>Заявления</h3>
         {% if appends %}
-          <ul>
+          <ul class="appends-list">
             {% for append in appends %}
               <li>{{ append.description }} {{ append.decision }} <a href="{% url 'myauth:check_appends' append.pk %}">Рассмотреть заявку</a></li>
             {% endfor %}
@@ -37,6 +103,6 @@
         {% endif %}
       </div>
       <div>
-          <a href="{% url 'myauth:users_list' %}">Back to list</a>
+          <a href="{% url 'myauth:users_list' %}" class="back-button">Вернуться к списку</a>
       </div>
 {% endblock %}

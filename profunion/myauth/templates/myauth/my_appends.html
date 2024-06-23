@@ -5,6 +5,59 @@
 {% endblock %}
 
 {% block body %}
+    <style>
+        h1 {
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Стили для списка заявлений */
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+/* Стили для каждого заявления в списке */
+li {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+/* Стили для заголовков заявлений */
+h3 {
+  color: #007bff;
+}
+
+/* Стили для комментариев, решений и файлов */
+p {
+  color: #666;
+  margin: 5px 0;
+}
+
+/* Стили для ссылок на скачивание */
+a {
+  color: #28a745;
+  text-decoration: none;
+}
+
+/* Стили для кнопки удаления */
+button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #c82333;
+}
+    </style>
     <h1>Мои заявления</h1>
     <ul>
         {% for append in object_list %}
